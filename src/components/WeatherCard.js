@@ -4,11 +4,12 @@ import sun from '../images/icons8-sun.svg'
 
 function WeatherCard(props) {
 
+    let image = `http://openweathermap.org/img/wn/${props.icon}@2x.png`
   return (
     <div className='weather_container'>
         <div className='container weather_content'>
             <div className='climate_figure'>
-                <img src={sun} alt='weather_icon' className='sun'/>
+                <img src= {image} alt='weather_icon' className='sun'/>
             </div>
             <div className='temp_info'>
                 <div className='place'>
@@ -20,11 +21,11 @@ function WeatherCard(props) {
             <div className='other_info'>
                 <div className='other_info_title'>
                     <p>Weather Condition</p>
-                    <p>Air Quality</p>
-                    <p>Humidity</p>
+                    <p>Air Quality(AQI)</p>
+                    <p>Humidity(%)</p>
                 </div>
                 <div className='other_info_value'>
-                    <p>~</p>
+                    <p>{props.weather}</p>
                     <p>{props.air}</p>
                     <p>{props.humidity}</p>
                 </div>

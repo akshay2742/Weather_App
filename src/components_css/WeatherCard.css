@@ -1,7 +1,7 @@
 .weather_container{
     width: 350px;
     height: 450px;
-    background: #fff;
+    background: rgb(113, 141, 145);
     margin: auto;
     border-radius: 20px;
 }
@@ -17,7 +17,6 @@
 .sun {
     margin: auto;
     transform-origin: center;
-    animation: rotate 5s linear infinite;
 }
 
 .temp_info{
@@ -60,14 +59,5 @@
 .other_info_value p{
     font-size: 20px;
 }
-@keyframes rotate 
-{
-    0% {
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      transform: rotate(360deg);
-    }
-}
+
 

@@ -9,37 +9,39 @@ import axios from 'axios';
 
 const InputField = styled(TextField)({
     '& label.Mui-focused': {
-      color: 'white',
+      color: 'black',
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'white',
+      borderBottomColor: 'black',
     },
     '& .MuiInput-underline:before':{
-        borderBottomColor: 'white',
+        borderBottomColor: 'black',
     },
     '&:hover .MuiInput-underline:before': {
-        borderBottomColor: 'white',
+        borderBottomColor: 'black',
     },
     '& .MuiFormLabel-root':{
-        color: 'white',
+        color: 'black',
     },
     '& .MuiInputBase-input':{
-        color: 'white',
+        color: 'black',
     }
   });
   
 function MainContent() {
 
-    const [city, setCity] = useState('');
-    const [country, setCountry] = useState('');
+    const [city, setCity] = useState('~');
+    const [country, setCountry] = useState('~');
 
     const [PassCity, setPassCity] = useState('~');
     const [PassCountry, setPassCountry] = useState('~');
 
-    const [temp, setTemp] = useState('');
-    const [humidity, setHumidity] = useState('');
-    const [weather, setWeather] = useState('');
-    const [air, setAir] = useState('');
+    const [temp, setTemp] = useState('~');
+    const [humidity, setHumidity] = useState('~');
+    const [weather, setWeather] = useState('~');
+    const [air, setAir] = useState('~');
+
+    const [icon, setIcon] = useState('10d');
 
     const UpdateCity = (event) => {
         setCity(event.target.value);
@@ -50,32 +52,41 @@ function MainContent() {
     
     const ChangeHandler = (event) => {
         event.preventDefault();
-        setPassCity(city);
-        setPassCountry(country);
+        
         let value = `${city},${country}`;
         let longitude = '';
         let latitude = '';
-        console.log(value);
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=5bc775205e68f6b982b87654ca6166ce`)
         .then(res => {
-            console.log(res);
             let temp_value = res.data.main.temp-273.15;
             setTemp(temp_value.toPrecision(3));
             setHumidity(res.data.main.humidity);
             longitude = res.data.coord.lon;
             latitude = res.data.coord.lat;
+            setWeather((res.data.weather[0].description).toUpperCase());
+            setIcon(res.data.weather[0].icon);
+            setPassCity(city);
+            setPassCountry(country);
         })
         .catch(err => {
-            console.log(err);
+            alert('Please enter a valid city and country');
+            setTemp('');
+            setHumidity('~');
+            longitude = '2000';
+            latitude = '2000';
+            setWeather('~');
+            setIcon('10d');
+            setPassCity('');
+            setPassCountry('');
         })
         axios.get(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=b22c933d-3f10-420e-89a7-377191d70f95`)
         .then(res => {
-            console.log(res);
             setAir(res.data.data.current.pollution.aqius);
         })
         .catch(err => {
-            console.log(err);
+            setAir('~');
         })
+        
     }
 
   return (
@@ -96,7 +107,7 @@ function MainContent() {
                 </Box>
                 
             </div>
-            <WeatherCard city={PassCity} country={PassCountry} temp={temp} air={air} humidity={humidity}/>
+            <WeatherCard city={PassCity} country={PassCountry} temp={temp} air={air} humidity={humidity} weather={weather} icon={icon}/>
         </div>
         
     </>
