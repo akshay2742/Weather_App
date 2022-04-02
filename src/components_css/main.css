@@ -1,0 +1,39 @@
+.main_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: url(../images/pexels-matthias-zomer-592658.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main_title{
+    color: #fff;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-size: 60px;
+    letter-spacing: 1px;
+}
+
+
+.inputs
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.Input{
+    width: 50%;
+    padding-right: 40px;
+}
+
+.Input div{
+    width: 100%;
+}
+.submit_button{
+    display: flex;
+    margin-top: auto;
+}

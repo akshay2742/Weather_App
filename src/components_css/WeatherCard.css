@@ -1,0 +1,73 @@
+.weather_container{
+    width: 350px;
+    height: 450px;
+    background: #fff;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.weather_content{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.climate_figure{
+    display: flex;
+}
+.sun {
+    margin: auto;
+    transform-origin: center;
+    animation: rotate 5s linear infinite;
+}
+
+.temp_info{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.place h1{
+    text-align: center;
+}
+.place h2{
+    text-align: center;
+}
+.place h3{
+    text-align: center;
+}
+
+.other_info{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.other_info_title{
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    margin-left: auto;
+}
+.other_info_title p{
+    font-weight: bold;
+    font-size: 20px;
+}
+.other_info_value{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.other_info_value p{
+    font-size: 20px;
+}
+@keyframes rotate 
+{
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
