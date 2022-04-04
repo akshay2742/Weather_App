@@ -41,6 +41,8 @@ function MainContent() {
     const [weather, setWeather] = useState('~');
     const [air, setAir] = useState('~');
 
+    const [longitude , setLongitude] = useState('');
+    const [latitude , setLatitude] = useState('');
     const [icon, setIcon] = useState('10d');
 
     const UpdateCity = (event) => {
@@ -54,15 +56,16 @@ function MainContent() {
         event.preventDefault();
         
         let value = `${city},${country}`;
-        let longitude = '';
-        let latitude = '';
+        
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=5bc775205e68f6b982b87654ca6166ce`)
         .then(res => {
             let temp_value = res.data.main.temp-273.15;
             setTemp(temp_value.toPrecision(3));
             setHumidity(res.data.main.humidity);
-            longitude = res.data.coord.lon;
-            latitude = res.data.coord.lat;
+            setLongitude(res.data.coord.lon);
+            setLatitude(res.data.coord.lat);
+            console.log(longitude);
+            console.log(latitude);
             setWeather((res.data.weather[0].description).toUpperCase());
             setIcon(res.data.weather[0].icon);
             setPassCity(city);
@@ -72,15 +75,15 @@ function MainContent() {
             alert('Please enter a valid city and country');
             setTemp('');
             setHumidity('~');
-            longitude = '2000';
-            latitude = '2000';
             setWeather('~');
             setIcon('10d');
             setPassCity('');
             setPassCountry('');
         })
+        
         axios.get(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=b22c933d-3f10-420e-89a7-377191d70f95`)
         .then(res => {
+            console.log(res)
             setAir(res.data.data.current.pollution.aqius);
         })
         .catch(err => {
