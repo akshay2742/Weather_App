@@ -106,5 +106,14 @@ h1{
     h2 img{
         width: 16%;
     }
+    .weather_icon{
+        margin-left: auto;
+        display: flex;
+        margin-right: auto;
+    }
+    .weather_icon img{
+        width: 50%;
+        margin: 0 auto;
+    }
 }
     

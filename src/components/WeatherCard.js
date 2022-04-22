@@ -23,7 +23,6 @@ function WeatherCard(props) {
         prevCityRef.current = props.city;
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${props.city},${props.country}&appid=5bc775205e68f6b982b87654ca6166ce`)
             .then(res => {
-                console.log(res);
                 setTemp((res.data.main.temp-273.15).toPrecision(2) + '°C');
                 setHumidity(res.data.main.humidity+'%');
                 setCondition(res.data.weather[0].main);
