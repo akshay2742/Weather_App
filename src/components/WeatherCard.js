@@ -1,37 +1,71 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import '../components_css/WeatherCard.css'
-import sun from '../images/icons8-sun.svg'
+import temp_icon from '../images/icons8-temperature-40.png'
+import humidity_icon from '../images/icons8-humidity-40.png'
+import condition_icon from '../images/icons8-weather-news-40.png'
+import axios from 'axios';
+import 'animate.css'
+
 
 function WeatherCard(props) {
 
-    let image = `http://openweathermap.org/img/wn/${props.icon}@2x.png`
+    const [temp, setTemp] = useState('');
+    const [humidity, setHumidity] = useState('');
+    const [condition, setCondition] = useState('');
+    const [icon, setIcon] = useState('10d');
+
+    const [location, setLocation] = useState('');
+
+    let image = `http://openweathermap.org/img/wn/${icon}@2x.png`
+
+    const prevCityRef = useRef();
+    useEffect(() => {
+        prevCityRef.current = props.city;
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${props.city},${props.country}&appid=5bc775205e68f6b982b87654ca6166ce`)
+            .then(res => {
+                console.log(res);
+                setTemp((res.data.main.temp-273.15).toPrecision(2) + '°C');
+                setHumidity(res.data.main.humidity+'%');
+                setCondition(res.data.weather[0].main);
+                setLocation(`${props.city}, ${props.country}`);
+                setIcon(res.data.weather[0].icon);
+            })
+            .catch(err => {
+                setTemp('');
+                setHumidity('');
+                setCondition('');
+                setLocation('');
+                setIcon('10d');
+                alert('Please enter a valid city and country');
+            })
+    },[props.city,props.country]) 
+
+    const style = prevCityRef.current === props.city? "" : "animate__animated animate__fadeIn";
+
   return (
-    <div className='weather_container'>
-        <div className='container weather_content'>
-            <div className='climate_figure'>
-                <img src= {image} alt='weather_icon' className='sun'/>
+      <div className='container output_screen'>
+          <div className='weather_icon'>
+              <img src={image} alt='weather icon' />
+          </div>
+          
+          <h1 className={`${style}`}>{location.toUpperCase()}</h1>
+          <div className='weather_info'>
+            <div className='container temperature'>
+                <h2 className='left'>Temperature<img src={temp_icon} alt='temp_icon'/></h2>
+                <h2 className={`${style} right`}>{temp}</h2>
             </div>
-            <div className='temp_info'>
-                <div className='place'>
-                    <h1>{props.temp} &#8451;</h1>
-                    <h2>{props.city}</h2>
-                    <h3>{props.country}</h3>
-                </div>
+            <hr></hr>
+            <div className='container temperature'>
+                <h2 className='left'>Humidity <img src={humidity_icon} alt='humdity_icon'/></h2>
+                <h2 className={`${style} right`}>{humidity}</h2>
             </div>
-            <div className='other_info'>
-                <div className='other_info_title'>
-                    <p>Weather Condition</p>
-                    <p>Air Quality(AQI)</p>
-                    <p>Humidity(%)</p>
-                </div>
-                <div className='other_info_value'>
-                    <p>{props.weather}</p>
-                    <p>{props.air}</p>
-                    <p>{props.humidity}</p>
-                </div>
+            <hr></hr>
+            <div className='container temperature'>
+                <h2 className='left'>Conditions <img src={condition_icon} alt='condition_icon'/></h2>
+                <h2 className={`${style} right`}>{condition}</h2>
             </div>
-        </div>
-    </div>
+          </div>
+      </div>
   )
 }
 

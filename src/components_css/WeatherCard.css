@@ -1,63 +1,110 @@
-.weather_container{
-    width: 350px;
-    height: 450px;
-    background: rgb(113, 141, 145);
-    margin: auto;
-    border-radius: 20px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
 
-.weather_content{
-    display: flex;
-    flex-direction: column;
+.output_screen{
+    display:flex;
+    flex-direction:column;
+    width: 100%;
     height: 100%;
+    justify-content: center;
 }
-.climate_figure{
-    display: flex;
-}
-.sun {
-    margin: auto;
-    transform-origin: center;
-}
-
-.temp_info{
-    display: flex;
-    flex-direction: column;
+.weather_icon{
     margin-left: auto;
     margin-right: auto;
 }
-.place h1{
+h1{
+    font-family: 'Fira Code', monospace;
+    font-size: 40px;
+    font-weight: 300;
+    color: white;
     text-align: center;
 }
-.place h2{
+.left{
+    font-family: 'Fira Code', monospace;
+    font-size: 30px;
+    font-weight: 300;
+    color: black;
     text-align: center;
+    width: 50%;
+    margin: auto;
+    display: flex;
 }
-.place h3{
+.right{
+    font-family: 'Fira Code', monospace;
+    font-size: 30px;
+    font-weight: 300;
+    color: black;
     text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.weather_info{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    margin: 0 auto;
+    background-color: #ECE9E6;
+    border-radius: 10px;
+    justify-content: center;
 }
 
-.other_info{
+.temperature{
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
-}
-.other_info_title{
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-    margin-left: auto;
-}
-.other_info_title p{
-    font-weight: bold;
-    font-size: 20px;
-}
-.other_info_value{
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-}
-.other_info_value p{
-    font-size: 20px;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
-
+@media screen and (max-width: 768px){
+    .temperature{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    h1{
+        font-family: 'Fira Code', monospace;
+        font-size: 20px;
+        font-weight: 300;
+        color: white;
+        text-align: center;
+    }
+    .left{
+        font-family: 'Fira Code', monospace;
+        font-size: 17px;
+        font-weight: 300;
+        color: black;
+        text-align: center;
+        width: 50%;
+        margin: auto;
+        display: flex;
+    }
+    .right{
+        font-family: 'Fira Code', monospace;
+        font-size: 17px;
+        font-weight: 300;
+        color: black;
+        text-align: center;
+        width: 50%;
+        margin: auto;
+    }
+    .output_screen{
+        display:flex;
+        flex-direction:column;
+        width: 100%;
+        height: 100%;
+    }
+    .weather_info{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 56%;
+        margin: 0 auto;
+        background-color: #ECE9E6;
+        border-radius: 10px;
+        justify-content: center;
+    }
+    h2 img{
+        width: 16%;
+    }
+}
+    
